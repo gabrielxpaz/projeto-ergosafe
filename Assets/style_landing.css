@@ -114,13 +114,13 @@ body{
 
 .texto-principal h2{
     font-size: 50px;
-    color: #5FA8AA; /* Um tom mais escuro de azul da paleta */
+    color: #fff; /* Um tom mais escuro de azul da paleta */
     text-shadow: black 0px 0px 5px;
 }
 
 .texto-principal p{
     font-size: 20px;
-    color: #fff;
+    color: #5FA8AA;
     text-shadow: black 0px 0px 5px;
     font-family: 'ADLaM Display', sans-serif;
 }
