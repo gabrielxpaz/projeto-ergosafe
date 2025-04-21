@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Projeto ErgoSafe, criado para monitorar e mostrar dados de postura corporal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielxpaz/projeto-ergosafe.git"
+  },
+  "author": "Gabriel, Vinicus, Arthur e Enzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielxpaz/projeto-ergosafe/issues"
+  },
+  "homepage": "https://github.com/gabrielxpaz/projeto-ergosafe#readme"
+}
