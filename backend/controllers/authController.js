@@ -1,7 +1,9 @@
 const db = require("../db/db");
+const bcrypt = require("bcrypt");
 
 exports.register = (req, res) => {
   const { name, email, password, role_id } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
   const insertUserSql =
     "INSERT INTO users (name, email, password, role_id) VALUES (?, ?, ?, ?)";
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,12 +19,9 @@ exports.register = (req, res) => {
     return res.status(400).json({ message: "Email inválido." });
   }
   if (!passwordRegex.test(password)) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Senha deve ter pelo menos 8 caracteres, uma letra e um número.",
-      });
+    return res.status(400).json({
+      message: "Senha deve ter pelo menos 8 caracteres, uma letra e um número.",
+    });
   }
   // Verificando se a role existe
   db.query(checkRoleSql, [role_id], (err, result) => {
@@ -39,7 +38,7 @@ exports.register = (req, res) => {
       // Inserindo o usuário no banco de dados
       db.query(
         insertUserSql,
-        [name, email, password, role_id],
+        [name, email, hashedPassword, role_id],
         (err, result) => {
           if (err)
             return res
