@@ -13,7 +13,9 @@ app.use(express.static("public"));
 //Roteamento
 app.use("/api/auth", authRoutes);
 
-app.listen(5000, (err) => {
-  if (err) return console.log(err);
-  console.log("Servidor rodando!");
+//Conexão banco
+db.sync().then(() => {
+  app.listen(5000, () => {
+    console.log("Banco de dados conectado!");
+  });
 });
