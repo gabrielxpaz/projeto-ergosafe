@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const User = require("./User");
 
 const db = require("../db/db");
 
@@ -9,12 +10,6 @@ const Role = db.define("Role", {
   },
 });
 
-// A associação deve ser configurada manualmente em outro lugar, como no arquivo de inicialização dos modelos.
-Role.associate = (models) => {
-  Role.hasMany(models.User, {
-    foreignKey: "role_id",
-    as: "users",
-  });
-};
+User.belongsTo(Role);
 
 module.exports = Role;
