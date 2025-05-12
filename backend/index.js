@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const handlebars = require("express-handlebars");
 const authRoutes = require("./routes/authRoutes.js");
+const homeRoutes = require("./routes/homeRoutes.js");
 
 // Configuração do Handlebars
 app.engine("handlebars", handlebars.engine());
@@ -18,9 +19,7 @@ app.use(express.static("public"));
 
 // Roteamento
 app.use("/api/auth", authRoutes);
-app.get("/", (req, res) => {
-  res.render("home"); // Renderiza a view "home.handlebars"
-});
+app.use("/", homeRoutes);
 
 // Conexão banco
 db.sync().then(() => {
