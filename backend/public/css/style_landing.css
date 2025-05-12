@@ -97,6 +97,7 @@ body{
     height: calc(100vh - 100px);
     background-image: url('../images/fundo-landing.png');
     background-size: cover;
+    display: flex;
 }
 
 .texto-principal{
@@ -106,6 +107,7 @@ body{
     flex-direction: column;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.9);
+    flex-grow: 1;
 }
 .texto-principal h2{
     font-size: 50px;
@@ -127,6 +129,12 @@ body{
     50% { transform: translatey(-10px); } 
     100% { transform: translatey(0px); } 
 } */
+
+.container-sobre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (max-width: 750px){
     .navbar ul{

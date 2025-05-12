@@ -12,9 +12,9 @@
         <h1>ErgoSafe</h1>
         <button id="hamburger"></button>
     <ul>
-        <li ><a href="/" id="selected">INÍCIO</a></li>
-        <li><a href="/projeto">PROJETO</a></li>
-        <li><a href="/sobre">SOBRE NÓS</a></li>
+        <li><a href="/" id="{{#if (eq currentRoute '/')}}selected{{/if}}">INÍCIO</a></li>
+        <li><a href="/projeto" id="{{#if (eq currentRoute '/projeto')}}selected{{/if}}">PROJETO</a></li>
+        <li><a href="/sobre" id="{{#if (eq currentRoute '/sobre')}}selected{{/if}}">SOBRE NÓS</a></li>
         <li><button>LOGIN</button></li>
     </ul>
        

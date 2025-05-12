@@ -2,12 +2,18 @@ const express = require("express");
 const db = require("./db/db.js");
 const app = express();
 const cors = require("cors");
-const handlebars = require("express-handlebars");
+const exphbs = require("express-handlebars");
 const authRoutes = require("./routes/authRoutes.js");
 const homeRoutes = require("./routes/homeRoutes.js");
 
+const hbs = exphbs.create({
+    helpers: {
+        eq: (a, b) => a === b
+    }
+});
+
 // Configuração do Handlebars
-app.engine("handlebars", handlebars.engine());
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
