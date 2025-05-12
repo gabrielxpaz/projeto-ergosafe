@@ -107,14 +107,9 @@ body{
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.9);
 }
-
-/*.texto-principal > * {
-    animation: float 3s ease-in-out infinite;
-}
-*/
 .texto-principal h2{
     font-size: 50px;
-    color: #fff; /* Um tom mais escuro de azul da paleta */
+    color: #fff;
     text-shadow: black 0px 0px 5px;
 }
 
