@@ -1,47 +1,36 @@
 const User = require("../models/User");
 const Role = require("../models/Role");
+const session = require("express-session");
 const bcrypt = require("bcrypt");
 const { validateUserInput } = require("../helpers/validationHelper");
 require("dotenv").config();
 
-exports.register = async (req, res) => {
-  const { name, email, password, role_id } = req.body;
+// Login
 
-  // Validação usando o helper
-  const validationError = validateUserInput({ name, email, password, role_id });
-  if (validationError) {
-    return res.status(400).json({ message: validationError });
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ where: { email } });
+  if (!req.body.email || !req.body.password) {
+    req.session.error = "Preencha todos os campos!";
+    return res.redirect("/login");
+  }
+  if (!user) {
+    req.session.error = "Email ou senha incorretos!";
+    return res.redirect("/login");
   }
 
-  // Verificando se o email existe
-  try {
-    const role = await Role.findByPk(role_id);
-    if (!role) {
-      return res.status(400).json({ message: "Função inválida." });
-    }
-    // Verificando se o email existe
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email já cadastrado." });
-    }
-    // Criptografando senha
-    const hashedPassword = await bcrypt.hash(
-      password,
-      parseInt(process.env.SALTS_ROUNDS)
-    );
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    // Criando usuário, finalmente
-    await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      role_id,
-    });
-
-    res.status(201).json({ message: "Usuário cadastrado com sucesso." });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erro ao cadastrar usuário.", error: error.message });
+  if (!isPasswordValid) {
+    req.session.error = "Email ou senha incorretos!";
+    return res.redirect("/login");
   }
+  req.session.user = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.roleId,
+  };
+
+  res.redirect("/home");
 };

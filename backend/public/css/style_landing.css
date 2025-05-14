@@ -108,6 +108,7 @@ body{
     background-position: top center;
     background-repeat: no-repeat;
     display: flex;
+
 }
 
 .texto-principal{
@@ -118,6 +119,8 @@ body{
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.9);
     flex-grow: 1;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .texto-principal h2{
     font-size: 50px;
@@ -167,6 +170,7 @@ footer a:hover {
     color: #1E293B;
     padding: 10px 20px;
     box-sizing: border-box;
+    gap:10px;
 }
 .foto-grupo{
     max-width: 500px;

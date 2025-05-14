@@ -7,5 +7,7 @@ exports.sobre = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  res.render("home/login");
+  const error = req.session.error;
+  req.session.error = null; // Limpa a mensagem de erro após exibi-la
+  res.render("home/login", { error });
 };
