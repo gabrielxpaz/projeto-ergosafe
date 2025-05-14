@@ -15,7 +15,12 @@
         <li><a href="/" class="nav-option" id="{{#if (eq currentRoute '/')}}selected{{/if}}">INÍCIO</a></li>
         <li><a href="/projeto" class="nav-option" id="{{#if (eq currentRoute '/projeto')}}selected{{/if}}">PROJETO</a></li>
         <li><a href="/sobre" class="nav-option" id="{{#if (eq currentRoute '/sobre')}}selected{{/if}}">SOBRE NÓS</a></li>
+        {{#if isLoggedIn}}
+        <li><a href="/login" class="login-button">Dashboard</a></li>
+        <li><a href="/auth/logout" class="logout-button">Logout</a></li>
+        {{else}}
         <li><a href="/login" class="login-button">LOGIN</a></li>
+        {{/if}}
     </ul>
        
    </nav>

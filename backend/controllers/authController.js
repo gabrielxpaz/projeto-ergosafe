@@ -30,7 +30,18 @@ exports.login = async (req, res) => {
     name: user.name,
     email: user.email,
     role: user.roleId,
+    isLoggedIn: true,
   };
 
   res.redirect("/home");
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Erro ao destruir a sessão:", err);
+      return res.status(500).send("Erro ao fazer logout");
+    }
+    res.redirect("/login");
+  });
 };
