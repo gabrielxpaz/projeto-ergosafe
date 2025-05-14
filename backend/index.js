@@ -7,9 +7,9 @@ const authRoutes = require("./routes/authRoutes.js");
 const homeRoutes = require("./routes/homeRoutes.js");
 
 const hbs = exphbs.create({
-    helpers: {
-        eq: (a, b) => a === b
-    }
+  helpers: {
+    eq: (a, b) => a === b,
+  },
 });
 
 // Configuração do Handlebars
@@ -26,6 +26,11 @@ app.use(express.static("public"));
 // Roteamento
 app.use("/api/auth", authRoutes);
 app.use("/", homeRoutes);
+
+//404
+app.use((req, res) => {
+  res.status(404).send("<h1>404 - Página não encontrada</h1>");
+});
 
 // Conexão banco
 db.sync().then(() => {

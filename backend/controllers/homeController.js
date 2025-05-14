@@ -5,3 +5,7 @@ exports.home = (req, res) => {
 exports.sobre = (req, res) => {
   res.render("home/sobre", { currentRoute: "/sobre" });
 };
+
+exports.login = (req, res) => {
+  res.render("home/login");
+};
