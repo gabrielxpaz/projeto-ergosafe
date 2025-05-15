@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
     id: user.id,
     name: user.name,
     email: user.email,
-    role: user.roleId,
+    role: user.RoleId,
     isLoggedIn: true,
   };
 
