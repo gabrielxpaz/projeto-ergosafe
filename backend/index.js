@@ -6,10 +6,12 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const authRoutes = require("./routes/authRoutes.js");
 const homeRoutes = require("./routes/homeRoutes.js");
+const dashRoutes = require("./routes/dashRoutes.js");
 
 const hbs = exphbs.create({
   helpers: {
     eq: (a, b) => a === b,
+    json: (context) => JSON.stringify(context),
   },
 });
 
@@ -37,6 +39,7 @@ app.use(express.static("public"));
 // Roteamento
 app.use("/auth", authRoutes);
 app.use("/", homeRoutes);
+app.use("/dashboard", dashRoutes);
 
 //404
 app.use((req, res) => {

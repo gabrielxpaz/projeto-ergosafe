@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="content">
+        <div class="container-create">
+        <div class="btn-create-user">
+            <a href="/dashboard/criar-usuario" class="btn">Criar Usuário</a>
+        </div>
+    </div>
+    <div id="table-users"></div>
+    </div>
+    
+</div>
+
+
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+<script>
+    const usersData = {{{json users}}};
+
+    console.log(usersData);
+
+  new gridjs.Grid({
+    columns: ['Nome', 'Email', 'Role'],
+    data: usersData,
+    pagination: { limit: 10 },
+  }).render(document.getElementById('table-users'));
+</script>

@@ -9,7 +9,15 @@ require("dotenv").config();
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({
+    where: { email },
+    include: {
+      model: Role,
+      attributes: ["name"],
+    },
+    raw: true,
+  });
+  console.log(user["Role.name"]);
   if (!req.body.email || !req.body.password) {
     req.session.error = "Preencha todos os campos!";
     return res.redirect("/login");
@@ -29,7 +37,7 @@ exports.login = async (req, res) => {
     id: user.id,
     name: user.name,
     email: user.email,
-    role: user.RoleId,
+    role: user["Role.name"],
     isLoggedIn: true,
   };
 

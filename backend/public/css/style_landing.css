@@ -163,7 +163,9 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
-
+.error-message{
+    text-align: center;
+}
 
 /* Animation for floating effect */
 /* @keyframes float {
@@ -171,6 +173,18 @@ footer a:hover {
     50% { transform: translatey(-10px); } 
     100% { transform: translatey(0px); } 
 } */
+
+.dash-button{
+    text-decoration: none;
+    background-color: #1D4ED8;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+.dash-button:hover{
+    background-color: #1a47c5;
+    transform: scale(1.05);
+}
 
 .container-sobre{
     display: flex;
