@@ -8,6 +8,8 @@
 .navbar{
     border-bottom: 1px solid #ccc;
     display: flex;
+    background-color: #2563EB;
+    color: white;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
@@ -25,7 +27,7 @@
 
 .navbar .dash-options ul li a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .container{
@@ -34,6 +36,7 @@
     justify-content: center;
     align-items: center;
     height: calc(100vh - 50px);
+    background-color: #F1F5F9;
 }
 
 .content{
@@ -41,7 +44,7 @@
 }
 
 .btn-create-user{
-    background-color: rgb(109, 247, 120);
+    background-color: rgb(0, 185, 15);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -49,12 +52,13 @@
     cursor: pointer;
     width: fit-content;
     margin-bottom: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn-create-user a{
     text-decoration: none;
     color: white;
-    text-shadow: 1px 1px 2px black;
+    font-weight: bold;
 }
 
 #table-users{
@@ -63,8 +67,73 @@
     /* max-height: ; */
 }
 
-.container-create{
-    align-self: flex-start;
+.create-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    height: fit-content;
+    border: 1px solid #ccc;
+    box-shadow: black 0px 0px 10px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.create-box form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 80%;
+    max-width: 200px;
+}
+
+.form-group label{
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+    font-weight: bold;
+}
+
+.form-group input{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form-group button[type="submit"]{
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.form-group select{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form-group select:focus{
+    outline: none;
+    border: 1px solid #2563EB;
 }
 
 footer {

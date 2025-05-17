@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="create-box">
+        <form action="/dashboard/editar-usuario" method="post">
+            <h2>Criar Usuário</h2>
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Função:</label>
+                <select id="role" name="role_id" required>
+                    {{#each roles}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Criar Usuário</button>
+            </div>
+
+            {{#if error}}
+                <div class="error-message" style="color: red;">
+                    <p>{{error}}</p>
+                </div>
+            {{/if}}
+        </form>
+    </div>
+</div>
