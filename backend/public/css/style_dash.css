@@ -136,6 +136,85 @@
     border: 1px solid #2563EB;
 }
 
+.deleteModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: black 0px 0px 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content form{
+    width: fit-content;
+}
+
+.action-modal{
+    display: flex;
+    gap: 10px;
+}
+
+.modal-content #confirm-delete{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #e74c3c;
+    cursor: pointer;
+}
+
+.modal-content #confirm-delete{
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 0;
+    width: fit-content;
+}
+
+.modal-content #cancel-delete{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #2563EB;
+    cursor: pointer;
+    width: fit-content;
+    justify-self: center;
+}
+
+.close{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.active{
+    display: flex;
+}
+
+.deactive{
+    display: none;
+}
+
 footer {
   background-color: #0f285e;
   color: #fff;

@@ -7,6 +7,7 @@ const exphbs = require("express-handlebars");
 const authRoutes = require("./routes/authRoutes.js");
 const homeRoutes = require("./routes/homeRoutes.js");
 const dashRoutes = require("./routes/dashRoutes.js");
+const adminRoutes = require("./routes/adminRoutes.js");
 
 const hbs = exphbs.create({
   helpers: {
@@ -40,6 +41,7 @@ app.use(express.static("public"));
 app.use("/auth", authRoutes);
 app.use("/", homeRoutes);
 app.use("/dashboard", dashRoutes);
+app.use("/admin", adminRoutes);
 
 //404
 app.use((req, res) => {

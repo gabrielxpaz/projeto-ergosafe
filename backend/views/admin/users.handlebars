@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="content">
+        <div class="container-create">
+        <div class="btn-create-user">
+            <a href="/admin/criar-usuario" class="btn">Criar Usuário</a>
+        </div>
+    </div>
+    <div id="table-users"></div>
+    </div>
+    
+</div>
+
+<div class="deleteModal deactive">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Excluir Usuário</h2>
+        <p>Você tem certeza que deseja excluir este usuário?</p>
+        <div class="action-modal">
+          <form action="/admin/delete" method="post">
+            <input type="hidden" name="userId" id="userId" value="">
+            <button type="button" id="confirm-delete" class="btn">Excluir</button>
+          </form>
+          
+          <button id="cancel-delete" class="btn">Cancelar</button>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<script>
+  const deleteModal = document.querySelector(".deleteModal");
+  const closeModal = document.querySelector(".close");
+  const cancelDelete = document.getElementById("cancel-delete");
+  const confirmDelete = document.getElementById("confirm-delete");
+  let userId;
+
+  closeModal.addEventListener("click", function() {
+    deleteModal.classList.add("deactive");
+    deleteModal.classList.remove("active");
+  });
+
+  cancelDelete.addEventListener("click", function() {
+    deleteModal.classList.add("deactive");
+    deleteModal.classList.remove("active");
+  });
+
+ confirmDelete.addEventListener("click", function () {
+  const userIdInput = document.getElementById("userId");
+  userIdInput.value = userId;
+
+  document.querySelector(".deleteModal form").submit();
+  deleteModal.classList.add("deactive");
+});
+
+
+
+
+
+
+
+  const usersData = {{{json users}}};
+
+  console.log(usersData);
+
+  const table = new Tabulator("#table-users", {
+  data: usersData,
+  layout: "fitColumns",
+  pagination: "local",
+  paginationSize: 10,
+  height: "400px",
+  columns: [
+    { title: "ID", field: "id"},
+    { title: "Nome", field: "name" },
+    { title: "Email", field: "email" },
+    { title: "Função", field: "role" },
+    {
+      title: "Ações",
+      formatter: function(cell, formatterParams) {
+        const id = cell.getRow().getData().id;
+        return `<button class="btn-edit" data-id="${id}">Editar</button>
+                <button class="btn-delete" data-id="${id}">Excluir</button>`;
+      },
+      width: 200,
+      hozAlign: "center",
+      cellClick: function(e, cell) {
+        const id = cell.getRow().getData().id;
+        if(e.target.classList.contains("btn-delete")) {
+          userId = id;
+          deleteModal.classList.add("active");
+          deleteModal.classList.remove("deactive");
+        } else if(e.target.classList.contains("btn-edit")) {
+          // Redireciona para a rota de edição
+          window.location.href = `/admin/editar-usuario/${id}`;  // Redireciona para a rota de edição
+        }else{
+          window.location.href = `/admin/editar-usuario/${id}`;  // Redireciona para a rota de edição
+        }
+        
+      }
+    }
+  ],
+});
+</script>
+
+<style>
+  .btn-edit {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-edit:hover {
+    background-color: #2980b9;
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+  }
+</style>
+
