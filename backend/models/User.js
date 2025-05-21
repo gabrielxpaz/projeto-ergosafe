@@ -19,6 +19,10 @@ const User = db.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  first_time: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+  },
 });
 
 module.exports = User;

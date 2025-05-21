@@ -23,6 +23,12 @@ router.get(
   adminController.editUserScreen
 );
 
+router.post(
+  "/resetar-senha/:id",
+  checkAuth,
+  checkAdmin,
+  adminController.adminResetPassword
+);
 router.post("/editar-usuario", checkAuth, checkAdmin, adminController.editUser);
 router.post("/delete", checkAuth, checkAdmin, adminController.deleteUser);
 

@@ -1,3 +1,5 @@
+const generatePassword = require("generate-password");
+
 exports.validateUserInput = ({ name, email, password, role_id }, mode) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
@@ -28,4 +30,17 @@ exports.validateUserInput = ({ name, email, password, role_id }, mode) => {
     default:
       return "Modo inválido.";
   }
+};
+
+exports.generatePassword = () => {
+  const senha = generatePassword.generate({
+    length: 12, // tamanho da senha
+    numbers: true, // inclui números
+    symbols: true, // inclui símbolos
+    uppercase: true, // inclui letras maiúsculas
+    lowercase: true, // inclui letras minúsculas
+    strict: true, // garante que todos os tipos estejam presentes
+  });
+
+  return senha;
 };

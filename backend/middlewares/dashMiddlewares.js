@@ -1,3 +1,6 @@
+const Role = require("../models/Role");
+const User = require("../models/User");
+
 exports.checkAuth = (req, res, next) => {
   if (req.session.user && req.session.user.isLoggedIn) {
     next();
@@ -13,4 +16,21 @@ exports.checkAdmin = (req, res, next) => {
   } else {
     res.redirect("/dashboard");
   }
+};
+
+exports.checkFirstTime = async (req, res, next) => {
+  const userId = req.session.user.id;
+  const user = await User.findOne({
+    where: { id: userId },
+  });
+
+  // Permite acesso à tela de first-time sem redirecionar em loop
+  if (req.path === "/first-time") return next();
+  console.log("oi");
+
+  if (user.first_time) {
+    return res.redirect("/dashboard/first-time");
+  }
+
+  next();
 };

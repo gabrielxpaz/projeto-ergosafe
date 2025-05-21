@@ -49,7 +49,7 @@ app.use((req, res) => {
 });
 
 // Conexão banco
-db.sync().then(() => {
+db.sync({}).then(() => {
   app.listen(5000, () => {
     console.log("Banco de dados conectado!");
   });

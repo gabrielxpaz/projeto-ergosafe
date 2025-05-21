@@ -12,10 +12,6 @@
                 <input type="email" id="email" name="email" value="{{user.email}}" required>
             </div>
             <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password">
-            </div>
-            <div class="form-group">
                 <label for="role">Função:</label>
                 <select id="role" name="role_id" required>
                     {{#each roles}}
@@ -32,6 +28,9 @@
                     <p>{{error}}</p>
                 </div>
             {{/if}}
+        </form>
+        <form action="/admin/resetar-senha/{{user.id}}" method="post" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-warning">Resetar Senha</button>
         </form>
     </div>
 </div>

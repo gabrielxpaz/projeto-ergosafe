@@ -2,7 +2,10 @@ const User = require("../models/User");
 const Role = require("../models/Role");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
-const { validateUserInput } = require("../helpers/validationHelper");
+const {
+  validateUserInput,
+  generatePassword,
+} = require("../helpers/validationHelper");
 const { Op } = require("sequelize");
 require("dotenv").config();
 
@@ -72,7 +75,7 @@ exports.createUser = async (req, res) => {
     RoleId: role_id,
   });
 
-  res.redirect("/admin/usuarios");
+  res.redirect("/admin/users");
 };
 
 exports.editUserScreen = async (req, res) => {
@@ -153,6 +156,29 @@ exports.editUser = async (req, res) => {
     }
   );
   res.redirect("/admin/users");
+};
+
+exports.adminResetPassword = async (req, res) => {
+  const { id } = req.params;
+  const password = generatePassword();
+  console.log(password);
+
+  const user = await User.findByPk(id);
+  if (!user) {
+    req.session.error = "Usuário não encontrado!";
+    return res.redirect("/admin/editar-usuario");
+  }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await User.update(
+    {
+      password: hashedPassword,
+    },
+    {
+      where: {
+        id,
+      },
+    }
+  );
 };
 
 exports.deleteUser = async (req, res) => {

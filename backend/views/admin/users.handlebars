@@ -27,39 +27,9 @@
     </div>
 </div>
 
-
+<script src="/js/script_delete.js"></script>
 
 <script>
-  const deleteModal = document.querySelector(".deleteModal");
-  const closeModal = document.querySelector(".close");
-  const cancelDelete = document.getElementById("cancel-delete");
-  const confirmDelete = document.getElementById("confirm-delete");
-  let userId;
-
-  closeModal.addEventListener("click", function() {
-    deleteModal.classList.add("deactive");
-    deleteModal.classList.remove("active");
-  });
-
-  cancelDelete.addEventListener("click", function() {
-    deleteModal.classList.add("deactive");
-    deleteModal.classList.remove("active");
-  });
-
- confirmDelete.addEventListener("click", function () {
-  const userIdInput = document.getElementById("userId");
-  userIdInput.value = userId;
-
-  document.querySelector(".deleteModal form").submit();
-  deleteModal.classList.add("deactive");
-});
-
-
-
-
-
-
-
   const usersData = {{{json users}}};
 
   console.log(usersData);
@@ -91,10 +61,7 @@
           deleteModal.classList.add("active");
           deleteModal.classList.remove("deactive");
         } else if(e.target.classList.contains("btn-edit")) {
-          // Redireciona para a rota de edição
-          window.location.href = `/admin/editar-usuario/${id}`;  // Redireciona para a rota de edição
-        }else{
-          window.location.href = `/admin/editar-usuario/${id}`;  // Redireciona para a rota de edição
+          window.location.href = `/admin/editar-usuario/${id}`;
         }
         
       }
