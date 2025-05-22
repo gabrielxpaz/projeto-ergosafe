@@ -17,7 +17,6 @@ exports.login = async (req, res) => {
     },
     raw: true,
   });
-  console.log(user["Role.name"]);
   if (!req.body.email || !req.body.password) {
     req.session.error = "Preencha todos os campos!";
     return res.redirect("/login");
@@ -35,10 +34,6 @@ exports.login = async (req, res) => {
   }
   req.session.user = {
     id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user["Role.name"],
-    isLoggedIn: true,
   };
 
   res.redirect("/home");

@@ -1,21 +1,39 @@
 const Role = require("../models/Role");
 const User = require("../models/User");
 
-exports.checkAuth = (req, res, next) => {
-  if (req.session.user && req.session.user.isLoggedIn) {
-    next();
-  } else {
-    req.session.error = "Você precisa estar logado para acessar essa página!";
-    res.redirect("/login");
+exports.checkAdmin = (req, res, next) => {
+  if (req.user.role == "admin") {
+    return next();
   }
+  res.redirect("/login");
 };
 
-exports.checkAdmin = (req, res, next) => {
-  if (req.session.user && req.session.user.role === "admin") {
-    next();
-  } else {
-    res.redirect("/dashboard");
+exports.userLoader = async (req, res, next) => {
+  const userId = req.session.user?.id;
+  if (!userId) {
+    req.session.destroy();
+    return res.redirect("/login");
   }
+  const user = await User.findOne({
+    where: { id: userId },
+    include: {
+      model: Role,
+      attributes: ["name"],
+    },
+  });
+
+  if (!user) {
+    req.session.destroy();
+    return res.redirect("/login");
+  }
+  req.user = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.Role.name,
+    first_time: user.first_time,
+  };
+  next();
 };
 
 exports.checkFirstTime = async (req, res, next) => {

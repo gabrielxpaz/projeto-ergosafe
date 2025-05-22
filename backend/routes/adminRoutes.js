@@ -1,35 +1,44 @@
 const { Router } = require("express");
 const router = Router();
 const adminController = require("../controllers/adminController");
-const { checkAuth, checkAdmin } = require("../middlewares/dashMiddlewares");
+const {
+  checkAdmin,
+  checkFirstTime,
+  userLoader,
+} = require("../middlewares/dashMiddlewares");
 
-router.get("/users", checkAuth, checkAdmin, adminController.users);
+router.get("/users", userLoader, checkAdmin, adminController.users);
 router.get(
   "/criar-usuario",
-  checkAuth,
+  userLoader,
   checkAdmin,
   adminController.createUserScreen
 );
 router.post(
   "/criar-usuario",
-  checkAuth,
+  userLoader,
   checkAdmin,
   adminController.createUser
 );
 router.get(
   "/editar-usuario/:id",
-  checkAuth,
+  userLoader,
   checkAdmin,
   adminController.editUserScreen
 );
 
 router.post(
   "/resetar-senha/:id",
-  checkAuth,
+  userLoader,
   checkAdmin,
   adminController.adminResetPassword
 );
-router.post("/editar-usuario", checkAuth, checkAdmin, adminController.editUser);
-router.post("/delete", checkAuth, checkAdmin, adminController.deleteUser);
+router.post(
+  "/editar-usuario",
+  userLoader,
+  checkAdmin,
+  adminController.editUser
+);
+router.post("/delete", userLoader, checkAdmin, adminController.deleteUser);
 
 module.exports = router;

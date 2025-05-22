@@ -10,7 +10,6 @@ const { Op } = require("sequelize");
 require("dotenv").config();
 
 exports.users = async (req, res) => {
-  const role = req.session.user.role;
   const usersRaw = await User.findAll({
     include: {
       model: Role,
@@ -26,7 +25,7 @@ exports.users = async (req, res) => {
     role: u["Role.name"],
   }));
 
-  res.render("admin/users", { layout: role, users });
+  res.render("admin/users", { layout: "admin", users });
 };
 
 exports.createUserScreen = async (req, res) => {

@@ -1,16 +1,16 @@
 exports.home = (req, res) => {
-  const isLoggedIn = req.session.user?.isLoggedIn || false;
-  res.render("home/home", { currentRoute: "/", isLoggedIn });
+  const user = req.session.user?.id;
+  res.render("home/home", { currentRoute: "/", user });
 };
 
 exports.sobre = (req, res) => {
-  const isLoggedIn = req.session.user?.isLoggedIn || false;
-  res.render("home/sobre", { currentRoute: "/sobre", isLoggedIn });
+  const user = req.session.user?.id;
+  res.render("home/sobre", { currentRoute: "/sobre", user });
 };
 
 exports.login = (req, res) => {
-  const isLoggedIn = req.session.user?.isLoggedIn || false;
-  if (isLoggedIn) {
+  const user = req.session.user?.id;
+  if (user) {
     return res.redirect("/home");
   }
   const error = req.session.error;

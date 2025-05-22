@@ -2,12 +2,11 @@ const { Router } = require("express");
 const router = Router();
 const dashController = require("../controllers/dashController");
 const {
-  checkAuth,
   checkAdmin,
   checkFirstTime,
+  userLoader,
 } = require("../middlewares/dashMiddlewares");
 
-router.get("/", checkAuth, dashController.dashboard);
-router.get("/first-time", dashController.firstTimeScreen);
+router.get("/", userLoader, dashController.dashboard);
 
 module.exports = router;
