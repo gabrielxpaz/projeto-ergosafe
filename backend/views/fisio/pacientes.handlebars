@@ -2,7 +2,7 @@
     <div class="content">
         <div class="container-create">
         <div class="btn-create-user">
-            <a href="/admin/criar-usuario" class="btn">Criar Usuário</a>
+            <a href="/fisio/criar-paciente" class="btn">Criar Paciente</a>
         </div>
     </div>
     <div id="table-patients"></div>
@@ -16,36 +16,39 @@
   console.log(patientsData);
 
   const table = new Tabulator("#table-patients", {
-  data: patientsData,
-  layout: "fitColumns",
-  pagination: "local",
-  paginationSize: 10,
-  height: "400px",
-  columns: [
-    { title: "ID", field: "id"},
-    { title: "Nome", field: "nome" },
-    { title: "Email", field: "email" },
-    {
-      title: "Ações",
-      formatter: function(cell, formatterParams) {
-        const id = cell.getRow().getData().id;
-        return `<button class="btn-edit" data-id="${id}">Editar</button>
-                <button class="btn-delete" data-id="${id}">Visualizar</button>`;
-      },
-      width: 200,
-      hozAlign: "center",
-      cellClick: function(e, cell) {
-        const id = cell.getRow().getData().id;
-        if(e.target.classList.contains("btn-delete")) {
-          userId = id;
-          deleteModal.classList.add("active");
-          deleteModal.classList.remove("deactive");
-        } else if(e.target.classList.contains("btn-edit")) {
-          window.location.href = `/admin/editar-usuario/${id}`;
-        }
-        
+    data: patientsData,
+    layout: "fitColumns",
+    pagination: "local",
+    paginationSize: 10,
+    height: "400px",
+    columns: [
+      { title: "ID", field: "id" },
+      { title: "Nome", field: "nome" },
+      { title: "Email", field: "email" },
+      {
+        title: "Ações",
+        formatter: function (cell, formatterParams) {
+          const id = cell.getRow().getData().id;
+          return `
+            <button class="btn-edit" data-id="${id}">Editar</button>
+            <button class="btn-view" data-id="${id}">Visualizar</button>
+          `;
+        },
+        width: 200,
+        hozAlign: "center"
       }
+    ],
+    rowFormatter: function(row) {
+      // Espera um pouco para garantir que o botão esteja no DOM
+      setTimeout(() => {
+        const btnView = row.getElement().querySelector(".btn-view");
+        if (btnView) {
+          btnView.addEventListener("click", () => {
+            const id = btnView.getAttribute("data-id");
+            window.location.href = `http://localhost:5000/fisio/paciente/${id}`;
+          });
+        }
+      }, 0);
     }
-  ],
-});
+  });
 </script>

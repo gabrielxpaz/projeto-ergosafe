@@ -34,7 +34,7 @@ exports.paciente = async (req, res) => {
     });
     const data = await Dados.findAll({
         where: {
-            sensorId: patientId
+            PacienteId: patientId
         },
         raw: true,
     })
@@ -49,3 +49,34 @@ exports.paciente = async (req, res) => {
     });
 }
 
+exports.addPacienteScreen = (req, res) => {
+    const user = req.user;
+    console.log(user);
+    res.render("fisio/createPaciente", {
+        layout: "fisio",
+        user,
+        error: req.session.error || null,
+    });
+    console.log(user);
+    req.session.error = null; // Clear the error after rendering
+}
+
+exports.addPaciente = async (req, res) => {
+    const user = req.user;
+    const { name, email, idade, userId  } = req.body;
+
+    console.log("Dados recebidos:", req.body);
+
+    Paciente.create({
+        nome: name,
+        email,
+        idade,
+        UserId: user.id, // Use the ID of the logged-in user
+    })
+
+    res.render("fisio/createPaciente", {
+        layout: "fisio",
+        user,
+        success: "Paciente adicionado com sucesso!",
+    });
+}
