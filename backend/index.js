@@ -11,6 +11,7 @@ const adminRoutes = require("./routes/adminRoutes.js");
 const fisioRoutes = require("./routes/fisioRoutes.js");
 require("dotenv").config();
 
+
 const hbs = exphbs.create({
   helpers: {
     eq: (a, b) => a === b,
