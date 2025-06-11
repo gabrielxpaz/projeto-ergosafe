@@ -39,6 +39,14 @@
     background-color: #F1F5F9;
 }
 
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Mantém centralizado na horizontal */
+  padding-top: 40px; /* Dá espaço abaixo da navbar */
+}
+
+
 .content{
     width: 80%;
 }

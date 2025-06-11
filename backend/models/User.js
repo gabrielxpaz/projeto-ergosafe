@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const Paciente = require("./Paciente");
 
 const db = require("../db/db");
 
@@ -24,5 +25,7 @@ const User = db.define("User", {
     defaultValue: true,
   },
 });
+
+Paciente.belongsTo(User);
 
 module.exports = User;

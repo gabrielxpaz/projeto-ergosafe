@@ -1,5 +1,6 @@
 const Role = require("../models/Role");
 const User = require("../models/User");
+const Paciente = require("../models/Paciente");
 
 exports.checkAdmin = (req, res, next) => {
   if (req.user.role == "admin") {
@@ -7,6 +8,13 @@ exports.checkAdmin = (req, res, next) => {
   }
   res.redirect("/login");
 };
+
+exports.checkFisio = (req, res, next) => {
+  if (req.user.role == "fisio") {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 exports.userLoader = async (req, res, next) => {
   const userId = req.session.user?.id;

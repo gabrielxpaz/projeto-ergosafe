@@ -1,0 +1,83 @@
+<div class="container1">
+  <div id="graficoYaw"></div>
+  <div id="graficoPitch"></div>
+</div>
+
+<script>
+  const dados = {{{json dados}}};
+  console.log(dados);
+
+  const labels = dados.map(d => new Date(d.createdAt).toLocaleTimeString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }));
+
+  const yawSeries = ['yaw0', 'yaw1', 'yaw2', 'yaw3'].map((key, i) => ({
+    name: `Yaw ${i}`,
+    data: dados.map(d => parseFloat(d[key]))
+  }));
+
+  const pitchSeries = ['pitch0', 'pitch1', 'pitch2', 'pitch3'].map((key, i) => ({
+    name: `Pitch ${i}`,
+    data: dados.map(d => parseFloat(d[key]))
+  }));
+
+  const optionsYaw = {
+    chart: { type: 'line' },
+    series: yawSeries,
+    xaxis: { categories: labels },
+    title: { text: 'Variação de Inclinação Lateral (º)' },
+    annotations: {
+      yaxis: [
+        {
+          y: -1, // valor ideal de Yaw
+          borderColor: '#00E396',
+          label: {
+            text: 'Valor Ideal',
+            style: {
+              color: '#fff',
+              background: '#00E396'
+            }
+          }
+        },
+        {
+            y: -15,
+            borderColor: '#FF0000',
+            label: {
+              text: 'Limite Inferior',
+              style: {
+                color: '#fff',
+                background: '#FF0000'
+              }
+            }
+        }
+      ]
+    }
+  };
+
+  const optionsPitch = {
+    chart: { type: 'line' },
+    series: pitchSeries,
+    xaxis: { categories: labels },
+    title: { text: 'Variação de Inclinação Frontal (º)' },
+    annotations: {
+      yaxis: [
+        {
+          y: 35, // valor ideal de Pitch
+          borderColor: '#FF4560',
+          label: {
+            text: 'Valor Ideal',
+            style: {
+              color: '#fff',
+              background: '#FF4560'
+            }
+          }
+        }
+      ]
+    }
+  };
+
+  new ApexCharts(document.querySelector("#graficoYaw"), optionsYaw).render();
+  new ApexCharts(document.querySelector("#graficoPitch"), optionsPitch).render();
+</script>
+

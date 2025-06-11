@@ -8,6 +8,8 @@ const authRoutes = require("./routes/authRoutes.js");
 const homeRoutes = require("./routes/homeRoutes.js");
 const dashRoutes = require("./routes/dashRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
+const fisioRoutes = require("./routes/fisioRoutes.js");
+require("dotenv").config();
 
 const hbs = exphbs.create({
   helpers: {
@@ -42,6 +44,7 @@ app.use("/auth", authRoutes);
 app.use("/", homeRoutes);
 app.use("/dashboard", dashRoutes);
 app.use("/admin", adminRoutes);
+app.use("/fisio", fisioRoutes);
 
 //404
 app.use((req, res) => {
